@@ -17,10 +17,10 @@
                     <div class="media-body">
                         <hr>
                         <h4><strong>个人简介</strong></h4>
-                        <p>There is only one thing I fear,and that is that I am not wotthy of what I have been through.</p>
+                        <p>{{ $user->introduction }}</p>
                         <hr>
                         <h4><strong>注册于</strong></h4>
-                        <p>January 01 2018</p>
+                        <p>{{ $user->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
+use Exception;
+
 
 class UsersController extends Controller
 {   
@@ -21,6 +23,13 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        try {
+
+            throw new Exception("Error Processing Request", 11111);
+            
+        } catch (Exception $e) {
+            dd($e->getCode());
+        }
         return view('users.show', compact('user'));
     }
 

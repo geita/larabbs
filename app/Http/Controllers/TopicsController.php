@@ -13,7 +13,14 @@ class TopicsController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-
+    /**
+     * 获取话题列表
+     * @Author   manhua
+     * @DateTime 2018-12-13
+     * @param    [array]
+     * @param    [object]
+     * @return   [type]     [description]
+     */
 	public function index()
 	{
 		$topics = Topic::with('category', 'user')->paginate(30);

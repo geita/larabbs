@@ -8463,3 +8463,31 @@ body {
   border-top: 1px solid #dcebf5;
 }
 
+/* User profile page */
+
+.user-show-page .user-info .thumbnail {
+  margin-bottom: 0px;
+}
+
+.user-show-page .nav-tabs {
+  margin-bottom: 20px;
+}
+
+.user-show-page .nav-tabs > li.active > a {
+  background-color: #fff;
+}
+
+.user-show-page .list-group .list-group-item {
+  border: none;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #efefef;
+}
+
+.user-show-page .list-group .meta {
+  color: #b3b3b3;
+}
+
+.user-show-page .pagination {
+  margin: 12px;
+}
+

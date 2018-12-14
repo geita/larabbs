@@ -9,10 +9,18 @@ use App\Http\Requests\TopicRequest;
 
 class TopicsController extends Controller
 {
+    /**
+     * __construct
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+
     /**
      * 获取话题列表
      * @Author   manhua
@@ -21,9 +29,9 @@ class TopicsController extends Controller
      * @param    [object]
      * @return   [type]     [description]
      */
-	public function index()
+	public function index(Request $request, Topic $topic)
 	{
-		$topics = Topic::with('category', 'user')->paginate(30);
+		$topics = $topic->withOrder($request->order)->paginate(30);
 		return view('topics.index', compact('topics'));
 	}
 

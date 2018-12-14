@@ -4,13 +4,29 @@ namespace App\Models;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
+    /**
+     * 话题与分类的模型
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @return   [type]     [description]
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * 用户话题模型
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @return   [type]     [description]
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -70,5 +86,19 @@ class Topic extends Model
     {
         //按照创建时间排序
         return $query->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * 定义修改器之标题都增加书名号
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    [type]     $query [description]
+     * @return   [type]            [description]
+     */
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = '《' . trim($value, ' ') . '》';
     }
 }

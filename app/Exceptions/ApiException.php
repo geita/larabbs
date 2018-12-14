@@ -5,7 +5,7 @@ namespace App\Exceptions;
 /**
  * 
  */
-class ApiException extends Exceptions
+class ApiException extends \Exceptions
 {
     private static $errors = [
         10000 => 'this is a api test!'

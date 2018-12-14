@@ -25,10 +25,10 @@ class UsersController extends Controller
     {
         try {
 
-            throw new Exception("Error Processing Request", 11111);
+            throw new Exception("Error Processing Request", 123);
             
         } catch (Exception $e) {
-            dd($e->getCode());
+            
         }
         return view('users.show', compact('user'));
     }

@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use Auth;
+use App\Handlers\ImageUploadHandler;
 
 class TopicsController extends Controller
 {
     /**
      * __construct
      * @Author   manhua
-     * @DateTime 2018-12-14
+     * @DateTime 2018-12-14tree simditor-2.3.6
      * @param    [array]
      * @param    [object]
      */
@@ -77,8 +78,9 @@ class TopicsController extends Controller
 
 	public function edit(Topic $topic)
 	{
+        $categories = Category::all();
         $this->authorize('update', $topic);
-		return view('topics.create_and_edit', compact('topic'));
+		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
 	public function update(TopicRequest $request, Topic $topic)
@@ -96,4 +98,36 @@ class TopicsController extends Controller
 
 		return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
 	}
+
+    /**
+     * 上传图片
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    Request            $request  [description]
+     * @param    ImageUploadHandler $uploader [description]
+     * @return   [type]                       [description]
+     */
+    public function uploadImage(Request $request, ImageUploadHandler $uploader)
+    {
+        //初始化返回数据，默认是失败的        
+        $data = [
+            "success"   => false,
+            "msg"       => "error message",
+            "file_path" => "",
+        ];
+        // 判断是否有上传文件，并赋值给 $file
+        if ($file = $request->upload_file) {
+            // 保存图片到本地
+            $result = $uploader->save($request->upload_file, 'topics', \Auth::id(), 1024);
+            // 图片保存成功的话
+            if ($result) {
+                $data['file_path'] = $result['path'];
+                $data['msg']       = "上传成功!";
+                $data['success']   = true;
+            }
+        }
+        return $data;
+    }
 }

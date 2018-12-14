@@ -44,3 +44,5 @@ Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'crea
 Route::get('provider/test', 'ProviderController@test');
 
 Route::resource('categories', 'CategoriesController', ['only' => 'show']);
+
+Route::post('image_upload', 'TopicsController@uploadImage')->name('topics.upload_image');

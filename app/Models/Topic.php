@@ -89,7 +89,7 @@ class Topic extends Model
     }
 
     /**
-     * 定义修改器之标题都增加书名号
+     * 修改器 标题增加书名号
      * @Author   manhua
      * @DateTime 2018-12-14
      * @param    [array]
@@ -100,5 +100,18 @@ class Topic extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = '《' . trim($value, ' ') . '》';
+    }
+
+    /**
+     * 修改器 防XSS
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    [type]     $value [description]
+     */
+    public function setBodyAttribute($value)
+    {
+        $this->attributes['body'] = clean($value, 'user_topic_body');
     }
 }

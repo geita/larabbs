@@ -11,6 +11,7 @@
 
     <title>@yield('title', 'LaraBBS')</title>
 
+    <meta charset="utf-8" name="description" content="@yield('description', 'LaraBBS 书籍社区')">
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     @yield('styles')

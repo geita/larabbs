@@ -38,4 +38,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Topic::class);
     }
+
+    /**
+     * 验证是否为作者
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    [type]     $model [description]
+     * @return   boolean           [description]
+     */
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
+    }
 }

@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
 
         //
         \Carbon\Carbon::setLocale('zh');
+
+        $headTopicName = '话题';
+        $headCategories = \App\Models\Category::all();
+        View()->share(['headTopicName' => $headTopicName, 'headCategories' => $headCategories]);
     }
 
     /**

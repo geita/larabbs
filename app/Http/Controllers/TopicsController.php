@@ -85,21 +85,51 @@ class TopicsController extends Controller
 		return redirect()->route('topics.show', $topic->id)->with('message', '成功创建话题！');
 	}
 
+    /**
+     * 编辑话题
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    Topic      $topic [description]
+     * @return   [type]            [description]
+     */
 	public function edit(Topic $topic)
 	{
+        $this->authorize('update', $topic);
         $categories = Category::all();
         $this->authorize('update', $topic);
 		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
+    /**
+     * 修改话题
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    TopicRequest $request [description]
+     * @param    Topic        $topic   [description]
+     * @return   [type]                [description]
+     */
 	public function update(TopicRequest $request, Topic $topic)
 	{
+        $this->authorize('update', $topic);
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
 		return redirect()->route('topics.show', $topic->id)->with('message', '更新成功！');
 	}
 
+    /**
+     * 删除话题
+     * @Author   manhua
+     * @DateTime 2018-12-14
+     * @param    [array]
+     * @param    [object]
+     * @param    Topic      $topic [description]
+     * @return   [type]            [description]
+     */
 	public function destroy(Topic $topic)
 	{
 		$this->authorize('destroy', $topic);

@@ -99,7 +99,9 @@ class Topic extends Model
      */
     public function setTitleAttribute($value)
     {
-        $this->attributes['title'] = '《' . trim($value, ' ') . '》';
+        if (!strstr($value, '《')) {
+            $this->attributes['title'] = '《' . trim($value, ' ') . '》';
+        }
     }
 
     /**
@@ -113,5 +115,19 @@ class Topic extends Model
     public function setBodyAttribute($value)
     {
         $this->attributes['body'] = clean($value, 'user_topic_body');
+    }
+
+    /**
+     * show 链接
+     * @Author   manhua
+     * @DateTime 2018-12-16
+     * @param    [array]
+     * @param    [object]
+     * @param    array      $params [description]
+     * @return   [type]             [description]
+     */
+    public function link($params = [])
+    {
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
 }

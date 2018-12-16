@@ -18,4 +18,18 @@ class ReplyObserver
     {
         //
     }
+
+    /**
+     * 创建成功后 话题加1
+     * @Author   manhua
+     * @DateTime 2018-12-16
+     * @param    [array]
+     * @param    [object]
+     * @param    Reply      $reply [description]
+     * @return   [type]            [description]
+     */
+    public function created(Reply $reply)
+    {
+        $reply->topic->increment('reply_count', 1);
+    }
 }

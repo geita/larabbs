@@ -64,7 +64,9 @@
             {{-- 用户回复列表 --}}
             <div class="panel panel-default topic-reply">
                 <div class="panel-body">
-                    @include('topics._reply_box', ['topic' => $topic])
+                    <!-- @include('topics._reply_box', ['topic' => $topic]) -->
+                    <!-- 视条件加载子模版 -->
+                    @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
                     @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
                 </div>
             </div>

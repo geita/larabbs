@@ -31,4 +31,9 @@ class Reply extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function setContentAttribute($value)
+    {
+        $this->attributes['content'] = clean($value, 'user_reply_content');
+    }
 }

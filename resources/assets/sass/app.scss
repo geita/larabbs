@@ -142,12 +142,10 @@ body {
         color: #b3b3b3;
     }
     .reply-content {
-        .margin: 6px 0;
+        margin: 6px 0;
     }
 }
 /* Topic Show Page */
-
-@import "topic_body";
 
 .topics-show-page {
 
@@ -176,3 +174,17 @@ body {
         color: #b3b3b3;
     }
 }
+/* Notifications badge */
+
+.notifications-badge {
+    margin-top: -1;
+
+    .badge-fade {
+        background-color: #EBE8E8;
+    }
+
+    .badge-hint {
+        background-color: #d15b47 !important;;
+    }
+}
+

@@ -130,4 +130,17 @@ class Topic extends Model
     {
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
+
+    /**
+     * 话题与回复 一对多
+     * @Author   manhua
+     * @DateTime 2018-12-16
+     * @param    [array]
+     * @param    [object]
+     * @return   [type]     [description]
+     */
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

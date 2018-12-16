@@ -47,3 +47,4 @@ Route::get('provider/test', 'ProviderController@test');
 Route::resource('categories', 'CategoriesController', ['only' => 'show']);
 
 Route::post('image_upload', 'TopicsController@uploadImage')->name('topics.upload_image');
+Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);

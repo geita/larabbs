@@ -162,6 +162,29 @@
         }
     }
 
+    if (!function_exists('administrator_settings_site_permission')) {
+        function administrator_settings_site_permission() {
+            return Auth::user()->hasRole('Founder');
+        }
+    }
+
+    if (!function_exists('administrator_settings_site_before_save')) {
+        function administrator_settings_site_before_save(&$data)
+        {
+            // 为网站名称加上后缀，加上判断是为了防止多次添加
+            if (strpos($data['site_name'], 'Powered by LaraBBS') === false) {
+                $data['site_name'] .= ' - Powered by LaraBBS';
+            }
+        }
+    }
+
+    if (!function_exists('administrator_settings_site_action_action')) {
+        function administrator_settings_site_action_action(&$data)
+            {
+                \Artisan::call('cache:clear');
+                return true;
+            }
+    }
 
 
 

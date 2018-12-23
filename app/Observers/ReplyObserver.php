@@ -37,4 +37,18 @@ class ReplyObserver
         // 通知作者话题被回复了
         $topic->user->notify(new TopicReplied($reply));
     }
+
+    /**
+     * 删除成功累计减1
+     * @Author   manhua
+     * @DateTime 2018-12-23
+     * @param    [array]
+     * @param    [object]
+     * @param    Reply      $reply [description]
+     * @return   [type]            [description]
+     */
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
+    }
 }

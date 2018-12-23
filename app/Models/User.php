@@ -81,10 +81,41 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
 
+
     public function markAsRead()
     {
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+
+    /**
+     * 修改器
+     * @Author   manhua
+     * @DateTime 2018-12-23
+     * @param    [array]
+     * @param    [object]
+     * @param    [type]     $value [description]
+     */
+    public function setPasswordAttribute($value)
+    {
+        //如果值的长度等于60，即认为是已经做过加密的情况
+        if (strlen($value) != 60) {
+
+            //不等于 60，做密码加密处理
+            $value = bcrypt($value);
+        }
+        $this->attributes['password'] = $value;
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        //如果不是 `http`字符串开头，那就是从后台上传的，需要补全url
+        if (!starts_with($value, 'http')) {
+            //拼接完整URL
+            $value = config('app.url') . "/uploads/images/avatar/$value";
+        }
+        $this->attributes['avatar'] = $value;
+    }
+
 }

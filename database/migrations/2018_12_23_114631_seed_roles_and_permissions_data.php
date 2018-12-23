@@ -43,17 +43,17 @@ class SeedRolesAndPermissionsData extends Migration
      */
     public function down()
     {
-        //清楚缓存
-        app()['cache']->forget('Spatie.permission.cache');
+        // 清除缓存
+        app()['cache']->forget('spatie.permission.cache');
 
-        //清空所有数据表数据
-        $tableNames = config('Permission.table_names');
+        // 清空所有数据表数据
+        $tableNames = config('permission.table_names');
 
         Model::unguard();
         DB::table($tableNames['role_has_permissions'])->delete();
         DB::table($tableNames['model_has_roles'])->delete();
         DB::table($tableNames['model_has_permissions'])->delete();
-        Db::table($tableNames['roles'])->delete();
+        DB::table($tableNames['roles'])->delete();
         DB::table($tableNames['permissions'])->delete();
         Model::reguard();
     }

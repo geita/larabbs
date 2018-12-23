@@ -58,6 +58,15 @@ class TopicObserver
          }
     }
 
+    /**
+     * 删除成功之后删除对应的回复
+     * @Author   manhua
+     * @DateTime 2018-12-23
+     * @param    [array]
+     * @param    [object]
+     * @param    Topic      $topic [description]
+     * @return   [type]            [description]
+     */
     public function deleted(Topic $topic)
     {
         \DB::table('replies')->where('topic_id', $topic->id)->delete();

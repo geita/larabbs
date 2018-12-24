@@ -10,6 +10,7 @@ use App\Http\Requests\TopicRequest;
 use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
+use App\Models\Link;
 
 class TopicsController extends Controller
 {
@@ -33,11 +34,12 @@ class TopicsController extends Controller
      * @param    [object]
      * @return   [type]     [description]
      */
-	public function index(Request $request, Topic $topic, user $user)
+	public function index(Request $request, Topic $topic, user $user, Link $link)
 	{
 		$topics = $topic->withOrder($request->order)->paginate(30);
         $active_users = $user->getActiveUsers();
-		return view('topics.index', compact('topics', 'active_users'));
+        $links = $link->getAllCached();
+		return view('topics.index', compact('topics', 'active_users', 'links'));
 	}
 
     /**

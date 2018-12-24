@@ -186,5 +186,11 @@
             }
     }
 
+    if (!function_exists('administrator_link_permissions')) {
+        function administrator_link_permissions() {
+            // 只有站长才能删除话题分类
+            return Auth::user()->hasRole('Founder');
+        }
+    }
 
 
